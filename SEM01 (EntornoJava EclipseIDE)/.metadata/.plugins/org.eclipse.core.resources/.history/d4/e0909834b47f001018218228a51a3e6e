@@ -1,0 +1,186 @@
+package GUI;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import Clases.Estudiante;
+
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Vent2 extends JFrame implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
+	private JTextField txtCodigo;
+	private JTextField txtNombre;
+	private JTextField txtN1;
+	private JTextField txtN2;
+	private JButton btnProcesar;
+	private JScrollPane scrollPane;
+	private JTextArea txtS;
+	private JButton btnLimpiar;
+	private JLabel lblNewLabel_4;
+	private JTextField txtN3;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Vent2 frame = new Vent2();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Vent2() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 472, 454);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblNewLabel = new JLabel("Código: ");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(41, 37, 63, 15);
+		contentPane.add(lblNewLabel);
+		
+		lblNewLabel_1 = new JLabel("Nombre: ");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1.setBounds(30, 63, 81, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		lblNewLabel_2 = new JLabel("Nota 1:");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_2.setBounds(41, 88, 63, 14);
+		contentPane.add(lblNewLabel_2);
+		
+		lblNewLabel_3 = new JLabel("Nota 2: ");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_3.setBounds(41, 113, 63, 14);
+		contentPane.add(lblNewLabel_3);
+		
+		txtCodigo = new JTextField();
+		txtCodigo.setBounds(96, 36, 132, 20);
+		contentPane.add(txtCodigo);
+		txtCodigo.setColumns(10);
+		
+		txtNombre = new JTextField();
+		txtNombre.setBounds(96, 63, 132, 20);
+		contentPane.add(txtNombre);
+		txtNombre.setColumns(10);
+		
+		txtN1 = new JTextField();
+		txtN1.setBounds(96, 88, 63, 20);
+		contentPane.add(txtN1);
+		txtN1.setColumns(10);
+		
+		txtN2 = new JTextField();
+		txtN2.setBounds(96, 112, 63, 20);
+		contentPane.add(txtN2);
+		txtN2.setColumns(10);
+		
+		btnProcesar = new JButton("Procesar");
+		btnProcesar.addActionListener(this);
+		btnProcesar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnProcesar.setBounds(311, 27, 99, 29);
+		contentPane.add(btnProcesar);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(41, 174, 369, 201);
+		contentPane.add(scrollPane);
+		
+		txtS = new JTextArea();
+		scrollPane.setViewportView(txtS);
+		
+		btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.addActionListener(this);
+		btnLimpiar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnLimpiar.setBounds(311, 56, 99, 29);
+		contentPane.add(btnLimpiar);
+		
+		lblNewLabel_4 = new JLabel("Nota 3: ");
+		lblNewLabel_4.setBounds(41, 138, 46, 14);
+		contentPane.add(lblNewLabel_4);
+		
+		txtN3 = new JTextField();
+		txtN3.setBounds(95, 135, 63, 20);
+		contentPane.add(txtN3);
+		txtN3.setColumns(10);
+
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnLimpiar) {
+			do_btnLimpiar_actionPerformed(e);
+		}
+		if (e.getSource() == btnProcesar) {
+			do_btnProcesar_actionPerformed(e);
+		}
+	}
+	protected void do_btnProcesar_actionPerformed(ActionEvent e) {
+		int cod = Integer.parseInt(txtCodigo.getText()); //Integer.parseInt sirve para convertir cadena de texto a entero
+		String nom = txtNombre.getText();
+		double n1 = Double.parseDouble(txtN1.getText()); //Double.parseDouble sirve para convertir cadena de texto a decimal
+		double n2 = Double.parseDouble(txtN2.getText());
+		double n3 = Double.parseDouble(txtN3.getText());
+		Estudiante e1 = new Estudiante(cod, nom, n1, n2, n3);
+		Listado(e1);
+	}
+	
+	void Imprimir(String s) {
+		txtS.append(s+"\n");
+	}
+	void Imprimir() {
+		txtS.append("------------------------------\n");
+	}
+	void Listado(Estudiante e) {
+		Imprimir("El código es: "+e.getCod());
+		Imprimir("El nombre es: "+e.getNom());
+		Imprimir("La nota 1 es: "+e.getN1());
+		Imprimir("La nota 2 es: "+e.getN2());
+		Imprimir("La nota 3 es: "+e.getN3());
+		Imprimir("El promedio es: "+e.promedio());
+		if(e.promedio()>=12) {
+			Imprimir("Mensaje: Estudiante aprobado");
+		}
+		else
+		{
+			Imprimir("Mensaje: Estudiante desaprobado");
+		}
+		Imprimir();
+	}
+	
+	protected void do_btnLimpiar_actionPerformed(ActionEvent e) {
+		txtCodigo.setText("");
+		txtNombre.setText("");
+		txtN1.setText("");
+		txtN2.setText("");
+		txtN3.setText("");
+		txtS.setText("");
+		txtCodigo.grabFocus(); //ubica el cursor en el objeto
+	}
+}

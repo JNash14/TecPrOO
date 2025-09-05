@@ -1,0 +1,9 @@
+package Clases;
+
+public class Estudiante {
+//Atributos
+	public int cod;
+	public String nom;
+	public double n1, n2;
+	
+}
