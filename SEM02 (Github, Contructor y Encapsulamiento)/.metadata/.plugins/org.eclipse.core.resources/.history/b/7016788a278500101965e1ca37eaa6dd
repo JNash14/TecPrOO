@@ -1,0 +1,77 @@
+package gui;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import Clase.Estudiante;
+
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
+
+public class Vent1 extends JFrame implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JButton btnProcesar;
+	private JScrollPane scrollPane;
+	private JTextArea txtS;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Vent1 frame = new Vent1();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Vent1() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		btnProcesar = new JButton("Procesar");
+		btnProcesar.addActionListener(this);
+		btnProcesar.setBounds(310, 24, 89, 29);
+		contentPane.add(btnProcesar);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(42, 123, 354, 107);
+		contentPane.add(scrollPane);
+		
+		txtS = new JTextArea();
+		scrollPane.setViewportView(txtS);
+
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnProcesar) {
+			do_btnProcesar_actionPerformed(e);
+		}
+	}
+	protected void do_btnProcesar_actionPerformed(ActionEvent e) {
+	Estudiante e1 = new Estudiante();
+	e1.cod = 1020;
+	txtS.append("El código es: "+e1.cod);
+		
+	}
+}
